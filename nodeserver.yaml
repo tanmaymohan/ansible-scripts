@@ -1,0 +1,42 @@
+-  hosts: all
+   become: yes 
+   tasks:  
+        -  name: install Apache HTTP Server
+           apt:
+              name: apache2
+              state: present
+              update_cache: true
+              force_apt_get: true
+        - name: enable mod_rewrite
+          apache2_module: name=rewrite state=present 
+        - name: enable mod_http2
+          apache2_module: name=http2 state=present 
+        - name: enable mod_proxy
+          apache2_module: name=proxy state=present     
+        - name: enabled mod_proxy_http
+          apache2_module: name=proxy state=present      
+
+        -  name: install APT Transport HTTPS
+           apt:
+             name: apt-transport-https
+             state: present
+        -  name: install ufw
+           apt:
+             name: ufw             
+             state: present 
+        -  name: install nodejs latest version 
+           apt:
+            name: nodejs
+            state: present
+        -  name: install npm latest version 
+           apt:
+            name: npm
+            state: present
+        -  name: install certbot    
+           apt:
+            name: certbot
+            state: present
+        -  name: Install pm2 (ADVANCED, PRODUCTION PROCESS MANAGER FOR NODE.JS)
+           npm:
+            name: pm2
+            global: yes 
