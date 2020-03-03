@@ -3,9 +3,15 @@
    vars_files:
      - vars/default.yml
    tasks:  
-        - name: Set timezone to Asia/Kolkata
+        - name: Set system timezone to Asia/Kolkata
           timezone: 
             name: Asia/Kolkata
+        - name: Install ubuntu utilities
+          apt: 
+             name: software-properties-common
+             state: present
+             update_cache: true
+             force_apt_get: true    
         -  name: install Apache HTTP Server
            apt:
               name: apache2
@@ -19,7 +25,9 @@
         - name: enable mod_proxy
           apache2_module: name=proxy state=present     
         - name: enabled mod_proxy_http
-          apache2_module: name=proxy_http state=present      
+          apache2_module: name=proxy_http state=present   
+        - name: enable mod_expires
+          apache2_module: name=expires state=present       
         - name: Setup Apache's document root
           file:
             path: "/var/www/{{ http_host }}"
@@ -33,6 +41,20 @@
            apt:
              name: ufw             
              state: present 
+
+        - name: Enable ufw 
+          ufw:
+            state: enabled
+            logging: 'on'
+        - name: Allow OpenSSH on ufw
+          ufw:
+            rule: allow
+            name: OpenSSH
+        - name: Allow Apache 80 and 443 on ufw
+          ufw:
+            rule: allow
+            name: "Apache Full" 
+        - name:         
         -  name: install nodejs latest version 
            apt:
             name: nodejs
@@ -45,7 +67,23 @@
            apt:
             name: certbot
             state: present
+        -  name: install curl    
+           apt:
+            name: curl
+            state: present    
         -  name: Install pm2 (ADVANCED, PRODUCTION PROCESS MANAGER FOR NODE.JS)
            npm:
             name: pm2
             global: yes 
+        -  name: Install htop (interactive system-monitor process-viewer and process-manager.)
+           apt:
+            name: htop
+            state: present
+        -  name: Install zip
+           apt:
+            name: zip
+            state: present
+        -  name: Install git 
+           apt:
+            name: git
+            state: present    
