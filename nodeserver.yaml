@@ -3,6 +3,9 @@
    vars_files:
      - vars/default.yml
    tasks:  
+        - name: Set timezone to Asia/Kolkata
+          timezone: 
+            name: Asia/Kolkata
         -  name: install Apache HTTP Server
            apt:
               name: apache2
