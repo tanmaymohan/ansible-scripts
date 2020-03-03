@@ -1,5 +1,7 @@
 -  hosts: all
-   become: yes 
+   become: yes
+   vars_files:
+     - vars/default.yml
    tasks:  
         -  name: install Apache HTTP Server
            apt:
@@ -14,8 +16,12 @@
         - name: enable mod_proxy
           apache2_module: name=proxy state=present     
         - name: enabled mod_proxy_http
-          apache2_module: name=proxy state=present      
+          apache2_module: name=proxy_http state=present      
+        - name: Setup Apache's document root
+          file:
+            path: "/var/www/{{ http_host }}"
 
+           
         -  name: install APT Transport HTTPS
            apt:
              name: apt-transport-https
