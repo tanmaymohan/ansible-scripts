@@ -1,6 +1,4 @@
-vars_files:
-  - vars/default.yml
-tasks: 
+--- 
         - name: Set system timezone to Asia/Kolkata
           timezone: 
             name: Asia/Kolkata
@@ -19,6 +17,3 @@ tasks:
               - 'software-properties-common'
               - 'htop'
               - 'build-essential'
-        - name: ADD universe repository
-          apt_repository:
-            repo: universe
