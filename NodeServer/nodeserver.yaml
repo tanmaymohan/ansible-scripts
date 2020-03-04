@@ -1,0 +1,23 @@
+-  hosts: all
+   become: yes
+   vars_files:
+     - vars/default.yml 
+   tasks:  
+  #packages for installation          
+        -  name: install nodejs latest version 
+           apt:
+            name: nodejs
+            state: present
+        -  name: install npm latest version 
+           apt:
+            name: npm
+            state: present
+
+        -  name: Install pm2 (ADVANCED, PRODUCTION PROCESS MANAGER FOR NODE.JS)
+           npm:
+            name: pm2
+            global: yes 
+   handlers:
+     -  include: handlers/handlers.yml
+
+

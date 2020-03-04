@@ -1,0 +1,13 @@
+vars_files:
+  - vars/default.yml
+tasks:
+        -  name: Add certbot repository
+           apt_repository:
+            repo: 'ppa:certbot/certbot'
+           apt:
+            name: "{{ item }}"
+            update_cache: true
+            state: present
+           with_items: 
+             - certbot
+             - python-certbot-apache
