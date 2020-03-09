@@ -18,15 +18,25 @@
               state: present
 
         -  name: enable mod_rewrite
-           apache2_module: name=rewrite state=present 
+           apache2_module: 
+            name: rewrite 
+            state: present 
         -  name: enable mod_http2
-           apache2_module: name=http2 state=present 
+           apache2_module: 
+            name: http2 
+            state: present 
         -  name: enable mod_proxy
-           apache2_module: name=proxy state=present     
+           apache2_module: 
+            name: proxy 
+            state: present     
         -  name: enabled mod_proxy_http
-           apache2_module: name=proxy_http state=present   
+           apache2_module: 
+            name: proxy_http 
+            state: present   
         -  name: enable mod_expires
-           apache2_module: name=expires state=present   
+           apache2_module: 
+            name: expires 
+            state: present   
               
         - name: Turn off ServerSignatures 
           blockinfile: 
