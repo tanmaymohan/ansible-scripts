@@ -5,7 +5,8 @@
           apt:
            name: nodejs
            state: present
-           update_cache: yes
+           update_cache: true 
+           force_apt_get: true
         - name: Install pm2 (ADVANCED, PRODUCTION PROCESS MANAGER FOR NODE.JS)
           npm:
            name: pm2
