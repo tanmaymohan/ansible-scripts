@@ -1,0 +1,19 @@
+- name: start the Laravel Server Playbook
+  hosts: all
+  become: yes
+  vars_files:
+     - vars/default.yml 
+  roles: 
+     - System
+     - Apache
+     - Database
+     - PHP
+     - Composer
+     - SSL
+     - Firewall
+
+  handlers:
+     - name: restart apache2
+       service: name=apache2 state=restarted
+     - name: stop mysql-server
+       service: name=mysql state=stopped

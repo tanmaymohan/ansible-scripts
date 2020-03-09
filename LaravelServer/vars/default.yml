@@ -1,0 +1,5 @@
+---
+http_host: "php.example.com"
+http_conf: "php.example.com.conf"
+http_port: "80"
+disable_default: true
