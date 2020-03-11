@@ -2,7 +2,7 @@
         -  name: Add apache ondrej latest repository
            apt_repository: 
              repo: 'ppa:ondrej/apache2'
-        -  name: Install Apache HTTP ServerSignature
+        -  name: Install Apache HTTP Server
            apt:
               name: apache2
               state: present
