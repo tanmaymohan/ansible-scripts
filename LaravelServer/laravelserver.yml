@@ -2,11 +2,16 @@
   hosts: all
   become: yes
   vars_files:
-     - vars/default.yml 
+     - vars/default.yml
+  vars_prompt:
+    - name: database_option
+      prompt: "Do you want to install MySQL (Y/N)"
+      default: "N"
+      private: no  
   roles: 
      - System
      - Apache
-     - Database
+     - { role: Database, when: database_option == "Y" or database_option == "y" }
      - PHP
      - Composer
      - SSL
