@@ -3,8 +3,15 @@
   become: yes
   vars_files:
      - vars/default.yml 
+  vars_prompt:
+    - name: database_option
+      prompt: "Which database system you want to install (mysql/mongodb/none)"
+      default: "none"
+      private: no
   roles: 
      - System
+     - { role: MySQL, when: database_option == "mysql" }
+     - { role: MongoDB, when: database_option == "mongodb" }
      - Apache
      - SSL
      - Firewall
