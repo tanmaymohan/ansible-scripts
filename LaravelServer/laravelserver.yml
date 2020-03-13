@@ -7,13 +7,19 @@
     - name: database_option
       prompt: "Do you want to install MySQL (Y/N)"
       default: "N"
-      private: no  
+      private: no 
+    - name: redis_option
+      prompt: "Do you want to install redis (yes/no)"  
+      default: "no"
+      private: no   
   roles: 
      - System
      - Apache
      - { role: Database, when: database_option == "Y" or database_option == "y" }
+     - { role: Redis, when: redis_option == "yes"}
      - PHP
      - Composer
+
      - SSL
      - Firewall
 

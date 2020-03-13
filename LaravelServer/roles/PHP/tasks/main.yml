@@ -22,4 +22,5 @@
               - 'php7.2-gd'
               - 'php7.2-opcache'
               - 'php7.2-json'
+              - 'php-redis'
 
