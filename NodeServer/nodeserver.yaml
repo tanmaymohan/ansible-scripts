@@ -1,23 +1,27 @@
--  hosts: all
-   become: yes
-   vars_files:
+- name: start the Server Playbook
+  hosts: all
+  become: yes
+  vars_files:
      - vars/default.yml 
-   tasks:  
-  #packages for installation          
-        -  name: install nodejs latest version 
-           apt:
-            name: nodejs
-            state: present
-        -  name: install npm latest version 
-           apt:
-            name: npm
-            state: present
-
-        -  name: Install pm2 (ADVANCED, PRODUCTION PROCESS MANAGER FOR NODE.JS)
-           npm:
-            name: pm2
-            global: yes 
-   handlers:
-     -  include: handlers/handlers.yml
-
+  vars_prompt:
+    - name: database_option
+      prompt: "Which database system you want to install (mysql/mongodb/none)"
+      default: "none"
+      private: no
+    - name: redis_option
+      prompt: "Do you want to install redis (yes/no)"  
+      default: "no"
+      private: no
+  roles: 
+     - System
+     - { role: MySQL, when: database_option == "mysql" }
+     - { role: MongoDB, when: database_option == "mongodb" }
+     - Apache
+     - SSL
+     - Firewall
+     - NodeJS
+     - { role: Redis, when: redis_option == "yes" }
+  handlers:
+     - name: restart apache2
+       service: name=apache2 state=restarted
 

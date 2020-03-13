@@ -1,5 +1,5 @@
 ---
-http_host: "your_domain"
-http_conf: "your_domain.conf"
+http_host: "web.example.com"
+http_conf: "web.example.com.conf"
 http_port: "80"
 disable_default: true

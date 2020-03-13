@@ -1,6 +1,11 @@
-vars_files:
-  - vars/default.yml
-tasks: 
+--- 
+        - name: Create SSH-Key using ssh-keygen for ubuntu user
+          user:
+            name: ubuntu
+            generate_ssh_key: yes
+            ssh_key_bits: 4096
+            ssh_key_file: .ssh/id_rsa
+
         - name: Set system timezone to Asia/Kolkata
           timezone: 
             name: Asia/Kolkata
@@ -19,6 +24,3 @@ tasks:
               - 'software-properties-common'
               - 'htop'
               - 'build-essential'
-        - name: ADD universe repository
-          apt_repository:
-            repo: universe
